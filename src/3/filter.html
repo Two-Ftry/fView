@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .h-bar {
+            margin-top: 3px;
+        }
+        .h-bar{
+            background-color: green;
+            color: #fff;
+        }
+        div.selected{
+            background-color: #f00;
+        }
+    </style>
+    <script type="text/javascript" src="../../lib/d3.v4.js"></script>
+</head>
+<body>
+    <div class="btn-box" onclick="handleClick(event)">
+        <button type="button">Retail</button>
+        <button type="button">Dining</button>
+        <button type="button">Gas</button>
+        <button type="button">Clear</button>
+    </div>
+    <div class="sort-box" onclick="handleSort(event)">
+        <button type="button">Sort by Expense</button>
+        <button type="button">Sort by Category</button>
+        <button type="button">Clear</button>
+    </div>
+    <script type="text/javascript" src="./02-filter.js?v=005"></script>
+    <script type="text/javascript">
+        function handleClick(event) {
+            const target = event.target || event.srcElement;
+            render(data, target.innerText)
+        }
+        function handleSort (event) {
+            // todo
+        }
+    </script>
+</body>
+</html>
