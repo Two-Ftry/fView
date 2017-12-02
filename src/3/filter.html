@@ -25,18 +25,33 @@
         <button type="button">Clear</button>
     </div>
     <div class="sort-box" onclick="handleSort(event)">
-        <button type="button">Sort by Expense</button>
-        <button type="button">Sort by Category</button>
+        <button type="button" id="expense-sort">Sort by Expense</button>
+        <button type="button" id="category-sort">Sort by Category</button>
         <button type="button">Clear</button>
     </div>
-    <script type="text/javascript" src="./02-filter.js?v=005"></script>
+    <script type="text/javascript" src="./02-filter.js?v=006"></script>
     <script type="text/javascript">
+        var text = '';
         function handleClick(event) {
             const target = event.target || event.srcElement;
-            render(data, target.innerText)
+            text = target.innerText;
+            render(data, text)
+        }
+        function expenseSort (a, b) {
+            return a.expense > b.expense ? 1 : -1;
+        }
+        function categorySort (a, b) {
+            return a.category > b.category ? 1 : -1;
         }
         function handleSort (event) {
-            // todo
+            const target = event.target || event.srcElement;
+            if (target.id === 'expense-sort') {
+                render(data, text, expenseSort)
+            } else if (target.id === 'category-sort') {
+                render(data, text, categorySort)
+            } else {
+                render(data, text, null)
+            }
         }
     </script>
 </body>

@@ -21,7 +21,7 @@ function render (data, category, comparator) {
         })
         .select('span')
         .text(function (d) {
-            return d.expense;
+            return d.category + ':' + d.expense;
         });
 
     // 退出
@@ -73,3 +73,23 @@ var data = [
 ];
 
 render(data);
+
+function load (text, comparator) {
+    d3.json('./data.json?v=001', function (err, serverData) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        data = data.concat(serverData);
+        render(data, text, comparator);
+    })
+
+    d3.text('./text.txt?v=001', function (err, serverData) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        data = data.concat(JSON.parse(serverData));
+        render(data, text, comparator);
+    })
+}
