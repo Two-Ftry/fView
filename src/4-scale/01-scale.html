@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .h-bar {
+            margin-top: 3px;
+            margin-left: 5px;
+            padding: 0 5px;
+        }
+        .h-bar{
+            background-color: green;
+            color: #fff;
+        }
+    </style>
+    <script type="text/javascript" src="../../lib/d3.v4.js"></script>
+</head>
+<body>
+    <div id="linear-scale">
+        <span>n</span>
+    </div>
+    <div id="linear-scale-capped">
+        <span>1&lt;=a*n+b<=20</span>
+    </div>
+    <div id="pow-scale">
+        <span>n^2</span>
+    </div>
+    <div id="pow-scale-capped">
+        <span>1&lt;=a*n^2+b<=20</span>
+    </div>
+    <div id="log-scale">
+        <span>log(n)</span>
+    </div>
+    <div id="log-scale-capped">
+        <span>1&lt;=a*log(n)+b<=20</span>
+    </div>
+    <script type="text/javascript">
+        var max = 10;
+        var data = [];
+        for (var i = 1; i <= max; i++) {
+            data.push(i);
+        }
+        var linear = d3.scaleLinear().domain([1, 10]).range([1, 10]);
+        var linearCapped = d3.scaleLinear().domain([1, 10]).range([1, 20]);
+        render(data, linear, '#linear-scale')
+        render(data, linearCapped, '#linear-scale-capped')
+
+        var pow = d3.scalePow().exponent(2);
+        var powCapped = d3.scalePow().exponent(2).domain([1, 10]).rangeRound([1, 10]);
+        render(data, pow, '#pow-scale')
+        render(data, powCapped, '#pow-scale-capped')
+
+        var log = d3.scaleLog();
+        var logCapped = d3.scaleLog().domain([1, 10]).rangeRound([1, 10]);
+        render(data, log, '#log-scale')
+        render(data, logCapped, '#log-scale-capped')
+
+        function render (data, scale, selector) {
+            // 进入
+            d3.select(selector).selectAll('.h-bar')
+                    .data(data)
+                    .enter()
+                    .append('div')
+                    .attr('class', 'h-bar')
+                    .append('span');
+
+            // 更新
+            d3.select(selector).selectAll('.h-bar')
+                    .data(data)
+//                    .style('width', function (d) {
+//                        return (d3.round(scale(d), 2)) + 'px';
+//                    })
+                    .style('display', 'inline-block')
+                    .select('span')
+                    .text(function (d) {
+                        return new Number(scale(d)).toFixed(2);
+                    });
+
+            // 退出
+            d3.select(selector).selectAll('.h-bar')
+                    .data(data)
+                    .exit()
+                    .remove();
+
+        }
+
+    </script>
+</body>
+</html>
