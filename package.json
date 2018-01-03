@@ -16,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/Two-Ftry/fView/issues"
   },
-  "homepage": "https://github.com/Two-Ftry/fView#readme"
+  "homepage": "https://github.com/Two-Ftry/fView#readme",
+  "dependencies": {
+    "eslint": "^4.13.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.3",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-plugin-vue": "^2.1.0"
+  }
 }

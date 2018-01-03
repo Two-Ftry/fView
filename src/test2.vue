@@ -1,13 +1,20 @@
 <template>
-
+    <div></div>
 </template>
 
 <script>
-export default {
-
+export   default {
+    name: '',
+    data ()  {
+        return {
+            title: ''
+        }
+    },
+    components: {
+    }
 }
 </script>
 
-<style>
+<style lang="less" rel="stylesheet/less" scoped>
 
 </style>
