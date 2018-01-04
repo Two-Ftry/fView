@@ -20,6 +20,19 @@
         },
         methods: {
             init () {
+                // 自定义插值器
+//                d3.interpolators.push(function (a, b) {
+//                    var re = /^\$([0-9,.]+)$/;
+//                    var ma, mb, f = d3.format(',.02f');
+//                    if ((ma = re.exec(a)) && (mb=re.exec(b))) {
+//                        a = parseFloat(ma[1]);
+//                        b = parseFloat(mb[1]) - a;
+//                        return function (t) {
+//                            return '$' + f(a + b * t);
+//                        }
+//                    }
+//                })
+
                 for (let i = 0; i < 11; ++i) {
                     this.data.push(i);
                 }
@@ -30,6 +43,7 @@
                 this.render(this.data, scale, '.interploate-box');
             },
             render (data, scale1, selector) {
+                var f = d3.format(',.02f');
                 // 进入
                 d3.select(selector)
                     .selectAll('span')
