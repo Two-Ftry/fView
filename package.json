@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "rimraf ./example/dist && webpack --config ./build/webpack.config.dev.js --watch",
-    "build": "webpack --config ./build/webpack.config.js"
+    "build": "rimraf ./dist && webpack --config ./build/webpack.config.js"
   },
   "repository": {
     "type": "git",

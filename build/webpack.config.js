@@ -6,7 +6,7 @@ var path = require('path');
 
 const config = {
     entry: {
-        index: './src/index.js'
+        fview: './src/index.js'
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
