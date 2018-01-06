@@ -4,8 +4,9 @@
   "description": "fView",
   "main": "index.js",
   "scripts": {
-    "dev": "rimraf ./example/dist && webpack --config ./build/webpack.config.dev.js --watch",
-    "server": "http-server . -p 30001",
+    "watch": "rimraf ./example/dist && webpack --config ./build/webpack.config.dev.js --watch",
+    "httpserver": "http-server . -p 30001",
+    "start": "webpack-dev-server --config ./build/webpack.config.dev.js",
     "build": "rimraf ./dist && webpack --config ./build/webpack.config.js"
   },
   "repository": {
@@ -26,6 +27,7 @@
     "css-loader": "^0.28.8",
     "html-webpack-plugin": "^2.30.1",
     "style-loader": "^0.19.1",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.10.0"
   }
 }

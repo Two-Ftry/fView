@@ -12,7 +12,10 @@ const config = {
         path: path.resolve(__dirname, '../example/dist'),
         filename: '[name].js'
     },
-    // devtool: 'source-map',
+    devtool: 'source-map',
+    devServer: {
+        contentBase: '../example/dist'
+    },
     module: {
         rules: [
             {
