@@ -1,13 +1,13 @@
 /**
  * Created by jfhuang on 18/1/5.
  */
-import '../../skin/default/bar.css';
+import '../../skin/default/column.css';
 import * as d3 from 'd3';
 import { containerUtil } from '../../common/container';
 
 import config from './config';
 
-const createBar = (selector, options) => {
+const createColumn = (selector, options) => {
     const data = options.data;
 
     // 预处理
@@ -15,20 +15,20 @@ const createBar = (selector, options) => {
         return;
     }
     options = Object.assign({}, options, config);
-    const barGrap = options.barGrap;
+    const columnGrap = options.columnGrap;
     // 获取条形大小
     const w = containerUtil.getCategoryWidth(selector, {
         count: data.length,
-        grap: barGrap
-    }, 'vertical');
+        grap: columnGrap
+    }, 'horizontal');
 
     // 尺度处理
     const min = d3.min(data);
     const max = d3.max(data);
-    const boxWidth = containerUtil.getContainerWidth(selector);
+    const boxHeight = containerUtil.getContainerHeight(selector);
     const scale = d3.scaleLinear()
         .domain([min, max])
-        .range([min, boxWidth]);
+        .range([min, boxHeight]);
 
     // 进入
     d3.select(selector)
@@ -36,7 +36,7 @@ const createBar = (selector, options) => {
         .data(data)
         .enter()
         .append('span')
-        .classed('fv-bar', true);
+        .classed('fv-column', true);
     // 退出
     d3.select(selector)
         .selectAll('span')
@@ -53,17 +53,17 @@ const createBar = (selector, options) => {
             }
             return null;
         })
-        .style('width', (item) => {
+        .style('height', (item) => {
             return scale(item) + 'px';
         })
-        .style('margin-top', (item, index) => {
+        .style('margin-left', (item, index) => {
             if (index === 0) {
                 return 0;
             }
-            return barGrap + 'px';
+            return columnGrap + 'px';
         })
-        .style('height', w + 'px');
+        .style('width', w + 'px');
 };
 
 
-export default createBar;
+export default createColumn;

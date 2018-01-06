@@ -24,7 +24,11 @@ const container = {
         }
         const paddingLeft = container.__getStyleValueByKey(box,'paddingLeft');
         const paddingRight = container.__getStyleValueByKey(box,'paddingRight');
-        return box.offsetWidth - paddingLeft - paddingRight;
+
+        const borderLeft = container.__getStyleValueByKey(box,'borderLeft');
+        const borderRight = container.__getStyleValueByKey(box,'borderRight');
+
+        return box.offsetWidth - paddingLeft - paddingRight - borderLeft - borderRight;
     },
     getContainerHeight (selector) {
         const box = container.__getContainer(selector);
@@ -33,7 +37,11 @@ const container = {
         }
         const paddingTop = container.__getStyleValueByKey(box,'paddingTop');
         const paddingBottom = container.__getStyleValueByKey(box,'paddingBottom');
-        return box.offsetHeight - paddingBottom - paddingTop;
+
+        const borderTop = container.__getStyleValueByKey(box,'borderTop');
+        const borderBottom = container.__getStyleValueByKey(box,'borderBottom');
+
+        return box.offsetHeight - paddingBottom - paddingTop - borderTop - borderBottom;
     },
     __getStyleValueByKey (ele, key) {
         if (!ele) {
@@ -56,7 +64,7 @@ const container = {
         } else {
             w = container.getContainerHeight(selector);
         }
-        w -= (option.count - 1) * option.barGraph;
+        w -= (option.count - 1) * option.grap;
         w /= option.count;
         return w;
     }

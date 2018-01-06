@@ -5,3 +5,7 @@
 import barExample from './modules/bar/_index';
 
 barExample();
+
+import columnExample from './modules/column/_index';
+
+columnExample();
