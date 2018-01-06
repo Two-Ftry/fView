@@ -14,7 +14,8 @@ const config = {
     },
     devtool: 'source-map',
     devServer: {
-        contentBase: '../example/dist'
+        contentBase: '../example/dist',
+        port: 30001
     },
     module: {
         rules: [

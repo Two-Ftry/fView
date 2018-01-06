@@ -12,37 +12,52 @@ const container = {
             box = document.getElementById(s);
         } else {
             const s = selector.split('.')[1]
-            console.log('@@@@s', s)
             const eles = document.getElementsByClassName(s);
             box = eles ? eles[0] : null;
         }
         return box;
     },
-    __getContainerWidth (selector) {
+    getContainerWidth (selector) {
         const box = container.__getContainer(selector);
         if (!box) {
             return;
         }
-        return box.offsetWidth;
+        const paddingLeft = container.__getStyleValueByKey(box,'paddingLeft');
+        const paddingRight = container.__getStyleValueByKey(box,'paddingRight');
+        return box.offsetWidth - paddingLeft - paddingRight;
     },
-    __getContainerHeight (selector) {
+    getContainerHeight (selector) {
         const box = container.__getContainer(selector);
-        console.log('@@@@box', box)
         if (!box) {
             return;
         }
-        return box.offsetHeight;
+        const paddingTop = container.__getStyleValueByKey(box,'paddingTop');
+        const paddingBottom = container.__getStyleValueByKey(box,'paddingBottom');
+        return box.offsetHeight - paddingBottom - paddingTop;
     },
-    getCategoryWidth (selector, count, orientation) {
-        if (!selector || isNaN(count) || !count) {
+    __getStyleValueByKey (ele, key) {
+        if (!ele) {
+            return;
+        }
+        const style = window.getComputedStyle(ele, null);
+        let val = style[key];
+        if (val && val.indexOf('px') !== -1) {
+            val = parseFloat(val.split('px')[0])
+        }
+        return val;
+    },
+    getCategoryWidth (selector, option, orientation) {
+        if (!selector || !option || isNaN(option.count) || !option.count) {
             return -1;
         }
         let w;
         if (orientation === 'horizontal') {
-            w = Math.floor(container.__getContainerWidth(selector) / count);
+            w = container.getContainerWidth(selector);
         } else {
-            w = Math.floor(container.__getContainerHeight(selector) / count);
+            w = container.getContainerHeight(selector);
         }
+        w -= (option.count - 1) * option.barGraph;
+        w /= option.count;
         return w;
     }
 };

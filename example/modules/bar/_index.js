@@ -10,7 +10,7 @@ export default () => {
     document.body.appendChild(div);
 
     const data = [];
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 10; i++) {
         data.push(i);
     }
 

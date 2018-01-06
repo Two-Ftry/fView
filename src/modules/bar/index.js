@@ -5,6 +5,8 @@ import '../../skin/default/bar.css';
 import * as d3 from 'd3';
 import { containerUtil } from '../../common/container';
 
+import config from './config';
+
 const createBar = (selector, options) => {
     const data = options.data;
 
@@ -12,12 +14,21 @@ const createBar = (selector, options) => {
     if (!data) {
         return;
     }
+    options = Object.assign({}, options, config);
+    const barGraph = options.barGrap;
     // 获取条形大小
-    const w = containerUtil.getCategoryWidth(selector, data.length, 'vertical');
+    const w = containerUtil.getCategoryWidth(selector, {
+        count: data.length,
+        barGraph
+    }, 'vertical');
 
+    // 尺度处理
+    const min = d3.min(data);
+    const max = d3.max(data);
+    const boxWidth = containerUtil.getContainerWidth(selector);
     const scale = d3.scaleLinear()
-        .domain([1,20])
-        .range([1, 400]);
+        .domain([min, max])
+        .range([min, boxWidth]);
 
     // 进入
     d3.select(selector)
@@ -37,10 +48,19 @@ const createBar = (selector, options) => {
         .selectAll('span')
         .data(data)
         .text((item) => {
-            return item;
+            if (options.text.isShow) {
+                return item;
+            }
+            return null;
         })
         .style('width', (item) => {
             return scale(item) + 'px';
+        })
+        .style('margin-top', (item, index) => {
+            if (index === 0) {
+                return 0;
+            }
+            return barGraph + 'px';
         })
         .style('height', w + 'px');
 };
