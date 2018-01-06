@@ -3,9 +3,17 @@
  */
 import '../../skin/default/bar.css';
 import * as d3 from 'd3';
+import { containerUtil } from '../../common/container';
 
 const createBar = (selector, options) => {
     const data = options.data;
+
+    // 预处理
+    if (!data) {
+        return;
+    }
+    // 获取条形大小
+    const w = containerUtil.getCategoryWidth(selector, data.length, 'vertical');
 
     const scale = d3.scaleLinear()
         .domain([1,20])
@@ -34,6 +42,7 @@ const createBar = (selector, options) => {
         .style('width', (item) => {
             return scale(item) + 'px';
         })
+        .style('height', w + 'px');
 };
 
 
