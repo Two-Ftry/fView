@@ -14,7 +14,7 @@ const createBar = (selector, options) => {
     if (!data) {
         return;
     }
-    options = Object.assign({}, options, config);
+    options = Object.assign({}, config, options);
     const barGrap = options.barGrap;
     // 获取条形大小
     const w = containerUtil.getCategoryWidth(selector, {
@@ -62,7 +62,8 @@ const createBar = (selector, options) => {
             }
             return barGrap + 'px';
         })
-        .style('height', w + 'px');
+        .style('height', w + 'px')
+        .style('background-color', options.color);
 };
 
 

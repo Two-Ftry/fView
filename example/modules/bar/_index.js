@@ -15,6 +15,7 @@ export default () => {
     }
 
     fview.createBar('.ex-bar-box', {
-        data: data
+        data: data,
+        color: 'rgb(198, 198, 46)'
     })
 }

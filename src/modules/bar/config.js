@@ -6,5 +6,6 @@ export default {
     barGrap: 5, // 条形之间的间隔
     text: {
         isShow: false
-    }
+    },
+    color: 'red'
 }

@@ -14,7 +14,7 @@ const createColumn = (selector, options) => {
     if (!data) {
         return;
     }
-    options = Object.assign({}, options, config);
+    options = Object.assign({}, config, options);
     const columnGrap = options.columnGrap;
     // 获取条形大小
     const w = containerUtil.getCategoryWidth(selector, {
@@ -62,7 +62,8 @@ const createColumn = (selector, options) => {
             }
             return columnGrap + 'px';
         })
-        .style('width', w + 'px');
+        .style('width', w + 'px')
+        .style('background-color', options.color);
 };
 
 

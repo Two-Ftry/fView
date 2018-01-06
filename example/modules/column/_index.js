@@ -15,6 +15,7 @@ export default () => {
     }
 
     fview.createColumn('.ex-column-box', {
-        data: data
+        data: data,
+        color: 'rgb(116, 224, 104)'
     })
 }
