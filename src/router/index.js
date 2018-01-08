@@ -8,6 +8,8 @@ import ScaleColor from '@/modules/d3-four/ScaleColor'
 import ScaleObject from '@/modules/d3-four/ScaleObject'
 import ScaleCustom from '@/modules/d3-four/ScaleCustom'
 
+import Axis1 from '@/modules/d3-5/Axis1'
+
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +48,11 @@ export default new Router({
           path: '/scalecustom',
           name: 'ScaleCustom',
           component: ScaleCustom
+      },
+      {
+          path: '/axis1',
+          name: 'Axis1',
+          component: Axis1
       }
   ]
 })
