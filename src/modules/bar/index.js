@@ -5,6 +5,8 @@ import '../../skin/default/bar.css';
 import * as d3 from 'd3';
 import { containerUtil } from '../../common/container';
 
+import axis from '../axis/axis';
+
 import config from './config';
 
 const createBar = (selector, options) => {
@@ -26,12 +28,25 @@ const createBar = (selector, options) => {
     const min = d3.min(data);
     const max = d3.max(data);
     const boxWidth = containerUtil.getContainerWidth(selector);
+    const boxHeight = containerUtil.getContainerHeight(selector);
     const scale = d3.scaleLinear()
         .domain([min, max])
         .range([min, boxWidth]);
 
+    axis.createValueAxis(selector, 'Bottom', scale, {
+        width: boxWidth,
+        height: boxHeight,
+        margin: options.margin || 0,
+        ticks: options.ticks
+    });
+
     // 进入
     d3.select(selector)
+        .style('position', 'relative')
+        .append('div')
+        .style('position', 'absolute')
+        .style('top', '10px')
+        .style('left', '10px')
         .selectAll('span')
         .data(data)
         .enter()
