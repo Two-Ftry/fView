@@ -10,6 +10,8 @@ import ScaleCustom from '@/modules/d3-four/ScaleCustom'
 
 import Axis1 from '@/modules/d3-5/Axis1'
 
+import D3Animation from '@/modules/d3-6/D3Animation'
+
 Vue.use(Router)
 
 export default new Router({
@@ -53,6 +55,11 @@ export default new Router({
           path: '/axis1',
           name: 'Axis1',
           component: Axis1
+      },
+      {
+          path: '/animation',
+          name: 'Animation',
+          component: D3Animation
       }
   ]
 })
