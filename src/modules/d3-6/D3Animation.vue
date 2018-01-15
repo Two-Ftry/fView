@@ -8,6 +8,12 @@
     <div class="animation-tweening">
         <p>5-中间帧</p>
     </div>
+    <div class="animation-left">
+        <p>集联效果</p>
+        <button @click="originSet">还原</button>
+        <button @click="renderLittleBox">传送</button>
+        <div class="little-box"></div>
+    </div>
 </div>
 </template>
 
@@ -22,7 +28,8 @@
 //            this.init()
 //            this.multiEleRender();
 //            this.renderEase();
-            this.renderTweening();
+//            this.renderTweening();
+            this.renderLittleBox();
         },
         methods:{
             init () {
@@ -255,10 +262,40 @@
                     }
                 }
 
+            },
+            renderLittleBox () {
+                const selector = '.little-box';
+                const transitionRender = function (s) {
+                    s.transition()
+                        .duration(300)
+                        .style('width', '200px')
+                        .style('height', '1px')
+                        .transition()
+                        .duration(100)
+                        .style('left', '600px')
+                        .transition()
+                        .duration(300)
+                        .style('left', '800px')
+                        .style('width', '80px')
+                        .style('height', '80px')
+                }
+                transitionRender(d3.select(selector));
+            },
+            originSet () {
+                const selector = '.little-box';
+                d3.select(selector)
+                    .style('left', 0);
             }
         }
     }
 </script>
 <style scoped>
-
+.little-box{
+    position: fixed;
+    left: 0;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background-color: #2e2e2e;
+}
 </style>
