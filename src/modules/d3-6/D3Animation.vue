@@ -14,6 +14,13 @@
         <button @click="renderLittleBox">传送</button>
         <div class="little-box"></div>
     </div>
+    <div class="animation-custom2">
+        <div>
+            <button @click="runCount('down')">countDown</button>
+            <button @click="runCount('up')">countUp</button>
+            <button @click="runCount('clear')">countClear</button>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -29,7 +36,8 @@
 //            this.multiEleRender();
 //            this.renderEase();
 //            this.renderTweening();
-            this.renderLittleBox();
+            // this.renderLittleBox();
+            this.renderCount();
         },
         methods:{
             init () {
@@ -285,6 +293,52 @@
                 const selector = '.little-box';
                 d3.select(selector)
                     .style('left', 0);
+            },
+            renderCount () {
+                const selector = '.animation-custom2';
+                const countBox = d3.select(selector).append('input')
+                    .attr('type', 'button')
+                    .classed('count-box', true);
+                this.countRender = {};
+                this.d3timer = null;
+                this.countRender.up = (target) => {
+                    this.d3timer && this.d3timer.stop();
+                    this.d3timer = d3.timer(() => {
+                        var value = parseInt(countBox.attr('value'));
+                        if (value >= target) {
+                            return true;
+                        }
+                        if (isNaN(value)) {
+                            value = 0;
+                        }
+                        countBox.attr('value', ++value);
+                    })
+                };
+                this.countRender.down = (target) => {
+                    this.d3timer && this.d3timer.stop();
+                    this.d3timer = d3.timer(() => {
+                        var value = parseInt(countBox.attr('value'));
+                        if (value <= target) {
+                            return true;
+                        }
+                        if (isNaN(value)) {
+                            value = 100;
+                        }
+                        value -= 1;
+                        countBox.attr('value', value);
+                    })
+                }
+                this.countRender.clear = () => {
+                    countBox.attr('value', 0);
+                }
+            },
+            runCount (type) {
+                const target = {
+                    up: 100,
+                    down: 0
+                }
+                console.log('@@@@runCount', type);
+                this.countRender[type](target[type]); 
             }
         }
     }
