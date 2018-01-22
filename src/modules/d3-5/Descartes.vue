@@ -38,7 +38,6 @@
 
                 this.renderXGridLine();
                 this.renderYGridLine();
-
             },
             renderXAxis () {
                 this.scaleX = d3.scaleLinear()

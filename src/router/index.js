@@ -12,6 +12,8 @@ import Axis1 from '@/modules/d3-5/Axis1'
 
 import D3Animation from '@/modules/d3-6/D3Animation'
 
+import D3Svg from '@/modules/d3-7/D3Svg.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +62,11 @@ export default new Router({
           path: '/animation',
           name: 'Animation',
           component: D3Animation
+      },
+      {
+          path: '/svg',
+          name: 'd3svg',
+          component: D3Svg
       }
   ]
 })
