@@ -24,7 +24,7 @@
                     this.data.push(i);
                 }
                 const scale = d3.scaleLinear()
-                    .domain([1,20])
+                    .domain([1, 20])
                     .range([{
                         color: 'white',
                         height: '15px'

@@ -46,16 +46,16 @@
         "no-useless-escape": "error",
         "prefer-rest-params": "warn",
         "no-new-func": "error",
-        // "space-before-function-paren": [
-        //   "error",
-        //   {
-        //     "anonymous": "always",
-        //     "named": "always",
-        //     "asyncArrow": "always"
-        //   }
-        // ],
+        "space-before-function-paren": [
+          "warn",
+          {
+            "anonymous": "always",
+            "named": "always",
+            "asyncArrow": "always"
+          }
+        ],
         "space-before-blocks": [
-            "error",
+            "warn",
             {
                 "functions": "always",
                 "keywords": "always",
